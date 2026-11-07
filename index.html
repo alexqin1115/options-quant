@@ -161,9 +161,10 @@ $('more').onclick=()=>{showAll=!showAll;renderTrades()};
 function renderSignal(){
  const s=D.signal||{};let st='—',sc='t2',rs='';
  if(s.state==='waiting'){st='Waiting for the open';const lt=(D.trades||[])[0];rs=lt?'Last trade · '+md(lt.date)+' · '+lt.side+' · '+pc(lt.pct):''}
- else if(s.state==='buy_call'){st='▲ Buy CALL';sc='up';rs=s.holding?'Position open.':'Signal fired — position closed.'}
- else if(s.state==='buy_put'){st='▼ Buy PUT';sc='dn';rs=s.holding?'Position open.':'Signal fired — position closed.'}
- else{st='No signal';rs='No trade today.'}
+ else if(s.state==='buy_call'){st='▲ Buy CALL';sc='up';rs=s.holding?'Position open.':'Position closed.'}
+ else if(s.state==='buy_put'){st='▼ Buy PUT';sc='dn';rs=s.holding?'Position open.':'Position closed.'}
+ else if(s.state==='position_open'){st='Position open';rs='Active shadow position.'}
+ else{st='No trade';rs='No trade today.'}
  $('sigd').textContent=s.date?md(s.date):'';$('st').textContent=st;$('st').className='state '+sc;$('rs').textContent=rs;
  renderPosition(s.position);
 }
